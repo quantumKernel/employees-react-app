@@ -1,20 +1,33 @@
 import './employees-list-item.css'
 import {Component} from 'react';
 
-class EmployeeListItem extends Component () {
+class EmployeeListItem extends Component {
     constructor (props) {
         super(props);
-        //no actions above eslint says that this contructor is useless but fo educational reason i'll left it
+        this.state = {
+            years: 27,
+            hasCookies: false
+        }
     };
+
+    giveCookie = () => {
+        if (this.state.hasCookies) {
+            this.setState({hasCookies : false});
+        } else {
+            this.setState({hasCookies : true});
+        }
+    }
+
     render (){
-        const {name, salary, increase} = this.props;
+        const {name, salary} = this.props;
         return(
-            <li className={"list-group-item d-flex justify-content-between" + (increase? ' increase' : '')}>
-            <span className="list-group-item-label">{name}</span>
+            <li className={"list-group-item d-flex justify-content-between" + (this.state.hasCookies? ' increase' : '')}>
+            <span className="list-group-item-label">{name+' '+this.state.years+' y.o.'}</span>
             <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
             <div className='d-flex justify-content-center align-items-center'>
                 <button type="button"
-                    className="btn-cookie btn-sm ">
+                    className="btn-cookie btn-sm "
+                    onClick={this.giveCookie}>
                     <i className="fas fa-cookie"></i>
                 </button>
 
