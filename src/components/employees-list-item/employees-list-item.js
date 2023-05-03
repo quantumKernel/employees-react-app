@@ -11,11 +11,14 @@ class EmployeeListItem extends Component {
     };
 
     giveCookie = () => {
-        if (this.state.hasCookies) {
-            this.setState({hasCookies : false});
-        } else {
-            this.setState({hasCookies : true});
-        }
+        // if (this.state.hasCookies) {
+        //     this.setState({hasCookies : false});
+        // } else {
+        //     this.setState({hasCookies : true});
+        // }
+        this.setState(state => {
+            return state.hasCookies? {hasCookies : false} : {hasCookies : true};
+        });
     }
 
     render (){
