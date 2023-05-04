@@ -1,8 +1,18 @@
+import {Component} from 'react'
+
 import './employee-add-form.css'
 
-const EmployeeAddForm = () => {
-    return (
-        <div className="app-add-form">
+class EmployeeAddForm extends Component {
+    constructor (props) {
+        super(props);
+        this.state = {
+            
+        }
+    };
+
+    render() {
+        return (
+            <div className="app-add-form">
             <h3>Add new employee</h3>
             <form
                 className="add-form d-flex">
@@ -17,7 +27,8 @@ const EmployeeAddForm = () => {
                         className="btn btn-outline-light">Add</button>
             </form>
         </div>
-    );
-};
+        );
+    };
+}
 
 export default EmployeeAddForm;

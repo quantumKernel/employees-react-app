@@ -6,26 +6,26 @@ class EmployeeListItem extends Component {
         super(props);
         this.state = {
             years: 27,
-            hasCookies: false
+            hasCookies: false,
+            favorite:false
         }
     };
 
     giveCookie = () => {
-        // if (this.state.hasCookies) {
-        //     this.setState({hasCookies : false});
-        // } else {
-        //     this.setState({hasCookies : true});
-        // }
-        this.setState(state => {
-            return state.hasCookies? {hasCookies : false} : {hasCookies : true};
-        });
-    }
+        this.setState(({hasCookies}) => ({hasCookies : !hasCookies}));
+    };
+
+    makeFavorite = () => {
+        this.setState(({favorite}) => ({favorite : !favorite}));
+    };
 
     render (){
         const {name, salary} = this.props;
+        const {hasCookies, years, favorite} = this.state;
         return(
-            <li className={"list-group-item d-flex justify-content-between" + (this.state.hasCookies? ' increase' : '')}>
-            <span className="list-group-item-label">{name+' '+this.state.years+' y.o.'}</span>
+            <li className={"list-group-item d-flex justify-content-between" + (hasCookies? ' increase' : '') + (favorite? ' like' : '')}>
+            <span className="list-group-item-label"
+                    onClick={this.makeFavorite}>{name+' '+years+' y.o.'}</span>
             <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
             <div className='d-flex justify-content-center align-items-center'>
                 <button type="button"
