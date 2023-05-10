@@ -7,7 +7,7 @@ class EmployeeAddForm extends Component {
         super(props);
         this.state = {
             name: '',
-            salary: 0 
+            salary: '' 
         }
     };
 

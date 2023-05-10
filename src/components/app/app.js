@@ -45,13 +45,13 @@ class App extends Component {
         });
     }
 
-    onClickIncrease = (id) => {
+    onToggleProp = (id, propName) => {
         this.setState(({data}) => ({
             data: data.map(item => {
                 if(item.id === id) {
                     return {
                         ...item,
-                        hasCookies: !item.hasCookies
+                        [propName]: !item[propName]
                     }
                 }
                 return item;
@@ -81,7 +81,7 @@ class App extends Component {
                 <AppInfo 
                     number={this.state.data.length}
                     hasCookiesNumber= {this.state.data.filter(item => item.hasCookies).length}
-                    />
+                />
     
                 <div className="search-panel">
     
@@ -93,8 +93,7 @@ class App extends Component {
                 <EmployeeList 
                     data={this.state.data}
                     onDelete={this.deleteItem}
-                    onClickFavorite={this.onClickFavorite}
-                    onClickIncrease={this.onClickIncrease}
+                    onToggleProp={this.onToggleProp}
                 />
                 <EmployeeAddForm
                     onAdd={this.addItem}
