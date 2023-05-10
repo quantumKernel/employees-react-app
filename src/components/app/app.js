@@ -37,7 +37,7 @@ class App extends Component {
                 salary: salary,
                 hasCookies: false,
                 favorite: false,
-                id:10
+                id:Object.keys(this.state.data).length+1
             }
             return {
                 data: [...data,  newEmployee],
@@ -78,7 +78,10 @@ class App extends Component {
     render () {
         return(
             <div className='app'>
-                <AppInfo/>
+                <AppInfo 
+                    number={Object.keys(this.state.data).length}
+                    hasCookiesNumber= {this.state.data.filter(item => item.hasCookies === true).length}
+                    />
     
                 <div className="search-panel">
     
