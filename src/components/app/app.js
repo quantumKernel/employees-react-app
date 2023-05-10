@@ -57,12 +57,21 @@ class App extends Component {
                 return item;
             })
         }));
-
     }
 
     onClickFavorite = (id) => {
 
-        console.log(id);
+        this.setState(({data}) => ({
+            data: data.map(item => {
+                if(item.id === id) {
+                    return {
+                        ...item,
+                        favorite: !item.favorite
+                    }
+                }
+                return item;
+            })
+        }));
 
     }
 
