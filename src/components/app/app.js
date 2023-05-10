@@ -31,18 +31,20 @@ class App extends Component {
     };
 
     addItem = (name, salary) => {
-        this.setState(({data}) => {
-            let newEmployee = {
-                name: name,
-                salary: salary,
-                hasCookies: false,
-                favorite: false,
-                id:Object.keys(this.state.data).length+1
-            }
-            return {
-                data: [...data,  newEmployee],
-            }
-        });
+        if (name.length >3 && salary) {
+            this.setState(({data}) => {
+                let newEmployee = {
+                    name: name,
+                    salary: salary,
+                    hasCookies: false,
+                    favorite: false,
+                    id:Object.keys(this.state.data).length+1
+                }
+                return {
+                    data: [...data,  newEmployee],
+                }
+            });
+        }
     }
 
     onToggleProp = (id, propName) => {

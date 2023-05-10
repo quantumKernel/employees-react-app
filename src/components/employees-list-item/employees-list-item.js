@@ -1,7 +1,7 @@
 import './employees-list-item.css'
 
 const EmployeeListItem = (props) => {
-    const {name, salary, onDelete, onToggleProp, hasCookies, favorite, years} = props;
+    const {name, salary, onDelete, onToggleProp, hasCookies, favorite} = props;
         
     return(
         <li className={"list-group-item d-flex justify-content-between" + (hasCookies? ' increase' : '') + (favorite? ' like' : '')}>
@@ -9,7 +9,7 @@ const EmployeeListItem = (props) => {
               onClick={onToggleProp}
               data-toggle="favorite"
         >
-            {name+' '+years+' y.o.'}
+            {name}
         </span>
         <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
         <div className='d-flex justify-content-center align-items-center'>
