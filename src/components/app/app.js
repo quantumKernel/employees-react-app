@@ -79,13 +79,13 @@ class App extends Component {
         return(
             <div className='app'>
                 <AppInfo 
-                    number={Object.keys(this.state.data).length}
-                    hasCookiesNumber= {this.state.data.filter(item => item.hasCookies === true).length}
+                    number={this.state.data.length}
+                    hasCookiesNumber= {this.state.data.filter(item => item.hasCookies).length}
                     />
     
                 <div className="search-panel">
     
-                    <SearchPanel/>
+                    <SearchPanel/>  
                     <AppFilter/>
     
                 </div>
