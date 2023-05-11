@@ -19,6 +19,8 @@ class App extends Component {
                 {name: 'Micke', salary: '700', id:3, hasCookies:true, favorite:false},
                 {name: 'Alice', salary: '945', id:4, hasCookies:false, favorite:false}
             ],
+            term: '',
+            filter: 'all'
         }
     };
 
@@ -47,6 +49,20 @@ class App extends Component {
         }
     }
 
+    onChangeSalary = (id, salary) => {
+        this.setState(({data}) => ({
+            data: data.map(item => {
+                if(item.id === id) {
+                    return {
+                        ...item,
+                        salary: salary
+                    }
+                }
+                return item;
+            })
+        }));
+    } 
+
     onToggleProp = (id, propName) => {
         this.setState(({data}) => ({
             data: data.map(item => {
@@ -59,6 +75,35 @@ class App extends Component {
                 return item;
             })
         }));
+    }
+
+    searchEmployee = (items, term) => {
+        if (term.length === 0) {
+            return items;
+        }
+
+        return items.filter(item => {
+            return item.name.indexOf(term) > -1;
+        });
+    }
+
+    filterEmployees = (items, filter) => {
+        switch (filter) {
+            case 'favorite':
+                return items.filter(item => item.favorite);
+            case 'salary':
+                return items.filter(item => item.salary > 1000);
+            default: 
+                return items;
+        }
+    }
+    
+    onUpdateSearch = (term) => {
+        this.setState({term});
+    }
+
+    onToggleFilter = (filter) => {
+        this.setState({filter});
     }
 
     onClickFavorite = (id) => {
@@ -78,24 +123,32 @@ class App extends Component {
     }
 
     render () {
+        const {data,term, filter} = this.state;
+        const visibleData = this.filterEmployees(this.searchEmployee(data, term), filter);
         return(
             <div className='app'>
                 <AppInfo 
-                    number={this.state.data.length}
-                    hasCookiesNumber= {this.state.data.filter(item => item.hasCookies).length}
+                    number={data.length}
+                    hasCookiesNumber= {data.filter(item => item.hasCookies).length}
                 />
     
                 <div className="search-panel">
     
-                    <SearchPanel/>  
-                    <AppFilter/>
+                    <SearchPanel
+                        onUpdateSearch={this.onUpdateSearch}
+                    />  
+                    <AppFilter
+                        onToggleFilter={this.onToggleFilter}
+                        filter={this.state.filter}
+                    />
     
                 </div>
     
                 <EmployeeList 
-                    data={this.state.data}
+                    data={visibleData}
                     onDelete={this.deleteItem}
                     onToggleProp={this.onToggleProp}
+                    onValueChange={this.onChangeSalary}
                 />
                 <EmployeeAddForm
                     onAdd={this.addItem}
